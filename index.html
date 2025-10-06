@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>My Web3 Quiz Hub — OG Builder Journey</title>
+<meta name="description" content="Play quizzes for Zama, Ligher, and Rialo. Earn badges, save scores, and tweet your achievements @Vikash1234Singh" />
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg1:#0b0f1a; --bg2:#071226;
+--glass: rgba(255,255,255,0.04);
+--muted:#b9c6d6;
+--radius:14px;
+--accent-yellow:#ffcc00;
+--accent-purple:#8b5cf6;
+--accent-blue:#00b4ff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+color:#eaf6ff;
+background: linear-gradient(120deg,#0b1220,#081129 40%, #071226 100%);
+overflow-y:auto;
+}
+.animated-bg {
+position:fixed;
+inset:0;
+z-index:-2;
+background: linear-gradient(120deg, rgba(255,204,0,0.07), rgba(139,92,246,0.06) 40%, rgba(0,180,255,0.05));
+animation: bgShift 14s ease-in-out infinite;
+filter: blur(40px) saturate(1.1);
+}
+@keyframes bgShift {
+0% {transform: translateY(0) rotate(0deg);}
+50% {transform: translateY(-8%) rotate(3deg);}
+100% {transform: translateY(0) rotate(0deg);}
+}
+.container{
+max-width:1100px;
+margin:30px auto;
+padding:20px;
+}
+header{
+text-align:center;
+padding:26px 12px;
+background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.03);
+box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+margin-bottom:18px;
+}
+.brand{display:inline-block;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,var(--accent-yellow),#ffd46a);color:#071226;font-weight:700}
+h1{margin:10px 0 6px;font-size:1.8rem;color:#fff}
+p.lead{color:var(--muted);margin:0;max-width:960px;margin-left:auto;margin-right:auto}
+.main-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:18px}
+@media(max-width:980px){ .main-grid{grid-template-columns:1fr} }
+.card{
+background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+border:1px solid rgba(255,255,255,0.03);
+padding:18px;border-radius:var(--radius);
+box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+}
+.projects{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between}
+.proj{
+flex:1 1 calc(33% - 12px);
+min-width:200px;
+padding:16px;border-radius:12px;color:#071226;background:#fff;cursor:pointer;
+transition:transform .2s, box-shadow .2s;
+display:flex;flex-direction:column;gap:8px;align-items:flex-start;
+}
+.proj:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,0.35)}
+.proj .title{font-weight:700}
+.proj .desc{font-size:13px;color:#333}
+.zama{background:linear-gradient(180deg,#fff7de,#fff1b0);border:1px solid rgba(0,0,0,0.06)}
+.lighter{background:linear-gradient(180deg,#f3eaff,#eedbff);border:1px solid rgba(0,0,0,0.06)}
+.rialo{background:linear-gradient(180deg,#dff7ff,#cdeeff);border:1px solid rgba(0,0,0,0.06)}
+.quiz-area{margin-top:16px}
+.quiz-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.badge{padding:6px 10px;border-radius:999px;font-weight:700;color:#071226}
+.badge.zama{background:linear-gradient(90deg,var(--accent-yellow),#ffd46a)}
+.badge.ligher{background:linear-gradient(90deg,var(--accent-purple),#b58fff)}
+.badge.rialo{background:linear-gradient(90deg,var(--accent-blue),#6fe0ff)}
+.question{font-size:18px;color:#f6f8fb;margin:14px 0;font-weight:600}
+.options{display:grid;gap:10px}
+.opt{padding:12px;border-radius:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.03);cursor:pointer;text-align:left;transition:transform .16s,background .16s}
+.opt:hover{transform:translateY(-4px)}
+.opt.correct{background:linear-gradient(90deg,#e6ffef,#b0f3d0);color:#05331a}
+.opt.wrong{background:linear-gradient(90deg,#ffdede,#ffbdbd);color:#4b0000}
+.controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--accent-yellow),#ffd46a);color:#071226}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#dbeffd}
+.progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;overflow:hidden;margin-top:10px}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent-yellow),#ffd46a);width:0%;transition:width .4s}
+.sidebar .section{margin-bottom:14px}
+.leaderboard .row{display:flex;justify-content:space-between;padding:10px;border-bottom:1px dashed rgba(255,255,255,0.03)}
+.leaderboard .row strong{color:#fff}
+.rankBox{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.badge-small{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03);font-weight:700;color:#fff}
+.finalCongrats{background:linear-gradient(90deg,#fff8d6,#ffe7a3);color:#071226;padding:14px;border-radius:12px;margin-top:12px;font-weight:700}
+footer{text-align:center;color:var(--muted);margin-top:20px;font-size:13px}
+a.link{color:var(--muted);text-decoration:none;font-weight:700}
+@media(max-width:720px){
+.proj{flex:1 1 100%}
+.main-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="animated-bg" aria-hidden="true"></div>
+<div class="container">
+<header>
+<div class="brand">My Web3 Quiz Hub</div>
+<h1>Play • Learn • Earn your OG Builder rank</h1>
+<p class="lead">Three short quizzes — Zama, Ligher, and Rialo. Complete them to unlock badges, save to the leaderboard, and tweet your achievement. Tagging: <strong>@Vikash1234Singh</strong></p>
+</header>
+<div class="main-grid">
+<div>
+<div class="card">
+<h3 style="margin:0 0 8px">Pick a project to begin</h3>
+<div class="projects" id="projectTiles">
+<div class="proj zama" data-project="zama">
+<div class="title">Zama — FHE & Privacy</div>
+<div class="desc">Interactive FHE quiz & demo. Theme: privacy-first (yellow).</div>
+</div>
+<div class="proj lighter" data-project="lighter">
+<div class="title">Ligher — zkRollups</div>
+<div class="desc">Learn zkRollup fundamentals with a short quiz. Theme: purple.</div>
+</div>
+<div class="proj rialo" data-project="rialo">
+<div class="title">Rialo — Real-world data</div>
+<div class="desc">Understand Rialo's real-world data focus with quick questions. Theme: blue.</div>
+</div>
+</div>
+<div class="quiz-area card" id="quizCard" style="display:none;margin-top:14px">
+<div class="quiz-header">
+<div>
+<div id="projTitle" style="font-weight:700">Project</div>
+<div id="projDesc" style="font-size:13px;color:var(--muted)">Short description</div>
+</div>
+<div>
+<div id="badgeEl" class="badge">BADGE</div>
+<div style="font-size:12px;color:var(--muted)">Your OG Rank: <span id="userRank">Newbie</span></div>
+</div>
+</div>
+<div style="margin-top:12px">
+<div class="progress"><i id="progBar"></i></div>
+<div class="question" id="questionText">Question text</div>
+<div class="options" id="optionsList"></div>
+<div class="controls">
+<button class="btn ghost" id="btnReveal">Reveal Answer</button>
+<button class="btn primary" id="btnNext" style="display:none">Next</button>
+<button class="btn ghost" id="btnFinish" style="display:none">Finish & Save</button>
+</div>
+<div style="margin-top:12px" class="small" id="scoreView">Score: <strong id="curScore">0</strong></div>
+</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+<div class="card" style="flex:1">
+<h4 style="margin:0 0 8px">Your Badges</h4>
+<div id="badgesRow" style="display:flex;gap:8px;flex-wrap:wrap">
+<div class="badge-small" id="bZama">Zama ❌</div>
+<div class="badge-small" id="bLigher">Ligher ❌</div>
+<div class="badge-small" id="bRialo">Rialo ❌</div>
+</div>
+<div style="margin-top:8px;color:var(--muted);font-size:13px">Badges unlock when you complete a project's quiz and save your score.</div>
+</div>
+<div class="card" style="flex:1">
+<h4 style="margin:0 0 8px">Quick Tips</h4>
+<ul style="color:var(--muted);font-size:13px;line-height:1.5">
+<li>Share your score on X to get noticed by the teams.</li>
+<li>Use your handle <strong>@Vikash1234Singh</strong> to tag yourself automatically.</li>
+<li>Top scores are saved in your browser's leaderboard.</li>
+</ul>
+</div>
+</div>
+</div>
+<aside class="sidebar">
+<div class="card">
+<div class="rankBox">
+<div>
+<h3 style="margin:0">Overall OG Progress</h3>
+<div style="color:var(--muted);font-size:13px">Complete all 3 quizzes to become an OG Builder</div>
+</div>
+<div><div id="overallBadge" class="badge zama">Progress</div></div>
+</div>
+<div style="margin-top:12px">
+<div style="display:flex;justify-content:space-between;color:var(--muted);font-size:13px"><div>Completed</div><div id="completedCount">0 / 3</div></div>
+<div style="height:12px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:8px;overflow:hidden">
+<div id="overallProg" style="height:12px;width:0%;background:linear-gradient(90deg,var(--accent-yellow),#ffd46a)"></div>
+</div>
+</div>
+</div>
+<div class="card leaderboard">
+<h3 style="margin:0 0 8px">Leaderboards (Local)</h3>
+<div style="font-size:13px;color:var(--muted);margin-bottom:10px">Top scores are saved in your browser</div>
+<div id="leaderboardsContainer"></div>
+</div>
+<div class="card" style="text-align:center">
+<div style="font-weight:700;margin-bottom:8px">Share & Invite</div>
+<button class="btn primary" id="shareAll">Share Hub on X</button>
+<div style="color:var(--muted);font-size:13px;margin-top:8px">Tweet your wins to get noticed by teams</div>
+</div>
+</aside>
+</div>
+<footer>Made with ❤️ — Tag the teams: <a class="link" href="https://x.com/zama_fhe" target="_blank">@zama_fhe</a> • <a class="link" href="https://x.com/vnovakovski" target="_blank">@vnovakovski</a> • <a class="link" href="https://x.com/RialoHQ" target="_blank">@RialoHQ</a></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+// =========================
+// Data & Config
+// =========================
+const userHandle = '@Vikash1234Singh';
+const PROJECTS = {
+zama: { name:'Zama', color:'var(--accent-yellow)', badgeEl:'bZama', tag:'@zama_fhe', hashtag:'#FHE',
+questions:[
+{q:'What does FHE stand for?', opts:['Fully Homomorphic Encryption','Fast Hybrid Encryption','Functional Hash Encoding','Fixed Homomorphic Engine'], a:0},
+{q:'Which library is associated with Zama?', opts:['Concrete','TensorFlow','PyTorch','OpenSSL'], a:0},
+{q:'What is the key advantage of FHE?', opts:['Compute on encrypted data','Faster blockchain blocks','Lower bandwidth','Free transactions'], a:0},
+{q:'Which language is common in Zama libs?', opts:['Rust','PHP','Ruby','Visual Basic'], a:0},
+{q:'Why is FHE important?', opts:['Privacy-preserving computation','Faster UI','Free gas','Better images'], a:0}
+]},
+lighter: { name:'Ligher', color:'var(--accent-purple)', badgeEl:'bLigher', tag:'@vnovakovski', hashtag:'#zkRollups',
+questions:[
+{q:'What does Ligher primarily build?', opts:['zk-rollup perpetual exchange','NFT marketplace','Lending protocol','Game engine'], a:0},
+{q:'Which is a core goal of Ligher?', opts:['Low latency trading','Cooking recipes','Photo sharing','Video hosting'], a:0},
+{q:'Ligher emphasizes which tech?', opts:['zk proofs','Proof-of-work','Centralized ledgers','CDNs'], a:0},
+{q:'What benefit do zkRollups bring?', opts:['Scale + on-chain security','Stop websites','Destroy tokens','Increase spam'], a:0},
+{q:'Who is a public team handle?', opts:['@vnovakovski','@someoneelse','@nobody','@anon'], a:0}
+]},
+rialo: { name:'Rialo', color:'var(--accent-blue)', badgeEl:'bRialo', tag:'@RialoHQ', hashtag:'#RealWorldWeb3',
+questions:[
+{q:'Rialo focuses on connecting what?', opts:['Real-world data to Web3','Only NFTs','Only wallets','Only games'], a:0},
+{q:'Which lab is behind Rialo?', opts:['Subzero Labs','Random Lab','No lab','SpaceX'], a:0},
+{q:'Rialo aims to improve?', opts:['Connectivity & speed','Cooking speed','Photo filters','Streaming quality'], a:0},
+{q:'Which investor participated in Rialo round?', opts:['Coinbase Ventures','Unknown','No one','A baker'], a:0},
+{q:'Rialo is best described as?', opts:['Real-data blockchain platform','Chat app','Ecommerce store','Music player'], a:0}
+]}
+};
+// State
+let currentProject=null,qIndex=0,curScore=0;
+// Helpers
+function el(id){return document.getElementById(id);}
+function setBadgeUnlocked(projectKey){const b=el(PROJECTS[projectKey].badgeEl);if(b){b.innerText=PROJECTS[projectKey].name+' ✅';b.style.background='linear-gradient(90deg,'+PROJECTS[projectKey].color+', #fff3b0)';}}
+function showQuiz(projectKey){currentProject=projectKey;qIndex=0;curScore=0;const p=PROJECTS[projectKey];el('quizCard').style.display='block';el('projTitle').innerText=p.name;el('projDesc').innerText=`Quick quiz — ${p.name} (${p.hashtag})`;el('badgeEl').innerText=p.name;el('badgeEl').className='badge '+projectKey;el('badgeEl').style.background=p.color;el('progBar').style.width='0%';el('curScore').innerText='0';el('btnNext').style.display='none';el('btnFinish').style.display='none';render
