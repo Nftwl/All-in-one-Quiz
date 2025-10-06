@@ -7,22 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --zama:#FFD700;       /* Gold */
-  --lighter:#9B59B6;    /* Purple */
-  --rialo:#1ABC9C;      /* Teal */
+  --zama:#ffca28;       /* professional yellow */
+  --lighter:#9b5de5;    /* bright purple */
+  --rialo:#00e5ff;      /* cyan */
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#0b1220,#071226);color:#fff;}
-.container{max-width:950px;margin:30px auto;padding:20px;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#0b1220,#071226);color:#fff;transition:background 1s;}
+.container{max-width:1000px;margin:30px auto;padding:20px;}
 header{text-align:center;margin-bottom:20px;}
-header h1{color:#fff;margin-bottom:5px;}
-header p{color:#ccc;}
+header h1{margin:10px 0;color:#fff;}
 .projects{display:flex;gap:15px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;}
 .proj{flex:1 1 30%;padding:20px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .2s, box-shadow .2s;text-align:center;color:#071226;}
 .proj:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.3);}
-.proj.zama{background:linear-gradient(180deg,#fff8b0,#FFD700);}
-.proj.lighter{background:linear-gradient(180deg,#e0c3ff,#9B59B6);}
-.proj.rialo{background:linear-gradient(180deg,#81f7f3,#1ABC9C);}
+.proj.zama{background:linear-gradient(180deg,#fff8b0,#fff07a);}
+.proj.lighter{background:linear-gradient(180deg,#eabfff,#c471ff);}
+.proj.rialo{background:linear-gradient(180deg,#b0ffff,#4defff);}
 .quiz-area{display:none;margin-top:20px;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;}
 .question{font-size:18px;margin:12px 0;}
 .options{display:grid;gap:10px;}
@@ -31,17 +30,19 @@ header p{color:#ccc;}
 .opt.wrong{background:linear-gradient(90deg,#ffdede,#ffbdbd);color:#4b0000;}
 .controls{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;}
 .btn{padding:10px 15px;border:none;border-radius:10px;cursor:pointer;font-weight:700;}
-.btn.primary{background:linear-gradient(90deg,#FFD700,#FFC300);color:#071226;}
+.btn.primary{background:linear-gradient(90deg,var(--zama),#ffd46a);color:#071226;}
 .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;}
 .progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:10px;overflow:hidden;}
-.progress > i{display:block;height:100%;background:linear-gradient(90deg,#FFD700,#FFC300);width:0%;transition:width .4s;}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--zama),#ffd46a);width:0%;transition:width .4s;}
 .leaderboard, .faqs, .comparison{margin-top:20px;background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;}
-.leaderboard h3, .faqs h3, .comparison h3{margin-top:0;}
-.faqs a, .comparison a{color:#fff;text-decoration:underline;}
+.faqs h3, .comparison h3{margin-top:0;}
+.faqs a{color:#fff;text-decoration:underline;}
+.comparison table{width:100%;border-collapse:collapse;margin-top:10px;}
+.comparison th, .comparison td{border:1px solid rgba(255,255,255,0.2);padding:8px;text-align:center;}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:10;}
 .modal-content{background:#fff;color:#071226;padding:20px;border-radius:12px;text-align:center;max-width:400px;width:90%;}
 .modal-content h2{margin-top:0;}
-.modal-content button{margin-top:15px;}
+.modal-content button{margin-top:10px;}
 </style>
 </head>
 <body>
@@ -63,7 +64,7 @@ header p{color:#ccc;}
 <div class="progress"><i id="progBar"></i></div>
 <div class="controls">
 <button class="btn primary" id="btnNext" style="display:none">Next</button>
-<button class="btn primary" id="btnFinish" style="display:none">Finish & Share</button>
+<button class="btn primary" id="btnFinish" style="display:none">Finish</button>
 </div>
 <div style="margin-top:10px">Score: <span id="scoreVal">0</span></div>
 </div>
@@ -82,33 +83,13 @@ header p{color:#ccc;}
 </ul>
 </div>
 
-<div class="comparison" id="comparison">
+<div class="comparison">
 <h3>Project Comparison</h3>
-<table style="width:100%;border-collapse:collapse;color:#fff;text-align:left;">
-<tr style="border-bottom:1px solid rgba(255,255,255,0.2);">
-<th>Project</th>
-<th>Focus</th>
-<th>Tech Stack</th>
-<th>Community</th>
-</tr>
-<tr>
-<td style="color:#FFD700;font-weight:700;">Zama</td>
-<td>Privacy-preserving FHE</td>
-<td>Concrete (Rust)</td>
-<td><a href="https://x.com/zama_fhe" target="_blank">@zama_fhe</a></td>
-</tr>
-<tr>
-<td style="color:#9B59B6;font-weight:700;">Ligher</td>
-<td>zk-rollup exchange & DeFi</td>
-<td>zkProofs, Solidity</td>
-<td><a href="https://x.com/vnovakovski" target="_blank">@vnovakovski</a></td>
-</tr>
-<tr>
-<td style="color:#1ABC9C;font-weight:700;">Rialo</td>
-<td>Real-world data to Web3</td>
-<td>Web3 SDKs, API</td>
-<td><a href="https://x.com/RialoHQ" target="_blank">@RialoHQ</a></td>
-</tr>
+<table>
+<tr><th>Project</th><th>Focus</th><th>Tech</th><th>Goal</th></tr>
+<tr><td>Zama</td><td>FHE Privacy</td><td>Rust / Concrete</td><td>Compute on encrypted data</td></tr>
+<tr><td>Ligher</td><td>zk-rollup Exchange</td><td>zk Proofs</td><td>Low latency & scale</td></tr>
+<tr><td>Rialo</td><td>Web3 Real Data</td><td>APIs & Data Oracles</td><td>Connect real data to blockchain</td></tr>
 </table>
 </div>
 
@@ -117,7 +98,8 @@ header p{color:#ccc;}
 <h2>🎉 Congratulations!</h2>
 <p id="modalMsg"></p>
 <button class="btn primary" id="shareBtn">Share on X</button>
-<button class="btn secondary" id="closeModal">Close</button>
+<button class="btn secondary" id="backBtn">Back to Projects</button>
+<button class="btn secondary" id="cutBtn">Close</button>
 </div>
 </div>
 
@@ -136,7 +118,7 @@ rialo:{hashtag:'#RealWorldWeb3',questions:[
 {q:'Lab behind Rialo?',opts:['Subzero Labs','Random Lab'],a:0}]}
 };
 let currentProject=null,qIndex=0,curScore=0;
-const LB_KEY='oghub_leaderboard_v1';
+const LB_KEY='oghub_leaderboard_v2';
 
 function showQuiz(proj){
   currentProject=proj;
@@ -199,12 +181,19 @@ document.getElementById('btnFinish').addEventListener('click',()=>{
   updateLeaderboard();
 });
 
-document.getElementById('closeModal').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
-
 document.getElementById('shareBtn').addEventListener('click',()=>{
   const p=PROJECTS[currentProject];
   const tweet=`I scored ${curScore} on ${currentProject} quiz! ${p.hashtag} ${userHandle} — try it: ${location.href}`;
   window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,'_blank');
+});
+
+document.getElementById('backBtn').addEventListener('click',()=>{
+  document.getElementById('modal').style.display='none';
+  document.getElementById('quizArea').style.display='none';
+});
+
+document.getElementById('cutBtn').addEventListener('click',()=>{
+  document.getElementById('modal').style.display='none';
 });
 
 function playSuccess(){try{new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3').play();}catch(e){}}
