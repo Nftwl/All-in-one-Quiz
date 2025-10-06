@@ -7,21 +7,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --zama:#ffca28;       /* professional yellow */
-  --lighter:#9b5de5;    /* bright purple */
-  --rialo:#00e5ff;      /* cyan */
+  --zama:#ffd700;       /* professional gold */
+  --lighter:#9b59b6;    /* deep purple */
+  --rialo:#1abc9c;      /* teal */
 }
 *{box-sizing:border-box;}
-body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#0b1220,#071226);color:#fff;transition:background 1s;}
-.container{max-width:1000px;margin:30px auto;padding:20px;}
+body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#0b1220,#071226);color:#fff;}
+.container{max-width:950px;margin:30px auto;padding:20px;}
 header{text-align:center;margin-bottom:20px;}
 header h1{margin:10px 0;color:#fff;}
 .projects{display:flex;gap:15px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;}
 .proj{flex:1 1 30%;padding:20px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .2s, box-shadow .2s;text-align:center;color:#071226;}
 .proj:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.3);}
-.proj.zama{background:linear-gradient(180deg,#fff8b0,#fff07a);}
-.proj.lighter{background:linear-gradient(180deg,#eabfff,#c471ff);}
-.proj.rialo{background:linear-gradient(180deg,#b0ffff,#4defff);}
+.proj.zama{background:linear-gradient(180deg,#fff7b2,#ffd700);}
+.proj.lighter{background:linear-gradient(180deg,#e6ccff,#9b59b6);}
+.proj.rialo{background:linear-gradient(180deg,#a0f0e5,#1abc9c);}
 .quiz-area{display:none;margin-top:20px;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;}
 .question{font-size:18px;margin:12px 0;}
 .options{display:grid;gap:10px;}
@@ -34,15 +34,17 @@ header h1{margin:10px 0;color:#fff;}
 .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;}
 .progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:10px;overflow:hidden;}
 .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--zama),#ffd46a);width:0%;transition:width .4s;}
-.leaderboard, .faqs, .comparison{margin-top:20px;background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;}
-.faqs h3, .comparison h3{margin-top:0;}
+.leaderboard{margin-top:20px;background:rgba(255,255,255,0.05);padding:12px;border-radius:12px;}
+.faqs{margin-top:20px;background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;}
+.faqs h3{margin-top:0;}
 .faqs a{color:#fff;text-decoration:underline;}
-.comparison table{width:100%;border-collapse:collapse;margin-top:10px;}
-.comparison th, .comparison td{border:1px solid rgba(255,255,255,0.2);padding:8px;text-align:center;}
+.comparison{margin-top:20px;background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;}
+.comparison table{width:100%;border-collapse:collapse;color:#071226;}
+.comparison th, .comparison td{padding:10px;border:1px solid rgba(0,0,0,0.2);text-align:center;}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:10;}
 .modal-content{background:#fff;color:#071226;padding:20px;border-radius:12px;text-align:center;max-width:400px;width:90%;}
 .modal-content h2{margin-top:0;}
-.modal-content button{margin-top:10px;}
+.modal-content button{margin-top:15px;}
 </style>
 </head>
 <body>
@@ -64,7 +66,7 @@ header h1{margin:10px 0;color:#fff;}
 <div class="progress"><i id="progBar"></i></div>
 <div class="controls">
 <button class="btn primary" id="btnNext" style="display:none">Next</button>
-<button class="btn primary" id="btnFinish" style="display:none">Finish</button>
+<button class="btn primary" id="btnFinish" style="display:none">Finish & Share</button>
 </div>
 <div style="margin-top:10px">Score: <span id="scoreVal">0</span></div>
 </div>
@@ -77,8 +79,8 @@ header h1{margin:10px 0;color:#fff;}
 <div class="faqs" id="faqs">
 <h3>Project Info & FAQs</h3>
 <ul>
-<li><strong>Zama:</strong> Privacy-focused FHE library. Visit <a href="https://x.com/zama_fhe" target="_blank">@zama_fhe</a></li>
-<li><strong>Ligher:</strong> zk-rollup exchange & DeFi project. Visit <a href="https://x.com/vnovakovski" target="_blank">@vnovakovski</a></li>
+<li><strong>Zama:</strong> Privacy-focused FHE library. Visit <a href="https://x.com/zama_fhe" target="_blank">@zama_fhe</a> & <a href="https://x.com/randhindi" target="_blank">@randhindi</a></li>
+<li><strong>Ligher:</strong> zk-rollup exchange & DeFi project. Visit <a href="https://x.com/vnovakovski" target="_blank">@vnovakovski</a> & <a href="https://x.com/lighter_xyz" target="_blank">@lighter_xyz</a></li>
 <li><strong>Rialo:</strong> Connects real-world data to Web3. Visit <a href="https://x.com/RialoHQ" target="_blank">@RialoHQ</a></li>
 </ul>
 </div>
@@ -86,10 +88,11 @@ header h1{margin:10px 0;color:#fff;}
 <div class="comparison">
 <h3>Project Comparison</h3>
 <table>
-<tr><th>Project</th><th>Focus</th><th>Tech</th><th>Goal</th></tr>
-<tr><td>Zama</td><td>FHE Privacy</td><td>Rust / Concrete</td><td>Compute on encrypted data</td></tr>
-<tr><td>Ligher</td><td>zk-rollup Exchange</td><td>zk Proofs</td><td>Low latency & scale</td></tr>
-<tr><td>Rialo</td><td>Web3 Real Data</td><td>APIs & Data Oracles</td><td>Connect real data to blockchain</td></tr>
+<tr><th>Feature</th><th>Zama</th><th>Ligher</th><th>Rialo</th></tr>
+<tr><td>Focus</td><td>FHE / Privacy</td><td>zk-rollups / DeFi</td><td>Real-world Data / Web3</td></tr>
+<tr><td>Core Tech</td><td>Concrete / Rust</td><td>zk proofs / Solidity</td><td>Blockchain / Oracles</td></tr>
+<tr><td>Goal</td><td>Privacy-preserving computation</td><td>Low latency trading</td><td>Connect off-chain data</td></tr>
+<tr><td>Team X Handles</td><td>@zama_fhe, @randhindi</td><td>@vnovakovski, @lighter_xyz</td><td>@RialoHQ</td></tr>
 </table>
 </div>
 
@@ -98,8 +101,8 @@ header h1{margin:10px 0;color:#fff;}
 <h2>🎉 Congratulations!</h2>
 <p id="modalMsg"></p>
 <button class="btn primary" id="shareBtn">Share on X</button>
-<button class="btn secondary" id="backBtn">Back to Projects</button>
-<button class="btn secondary" id="cutBtn">Close</button>
+<button class="btn secondary" id="backBtn">Back to Quizzes</button>
+<button class="btn secondary" id="closeModal">Close</button>
 </div>
 </div>
 
@@ -181,19 +184,16 @@ document.getElementById('btnFinish').addEventListener('click',()=>{
   updateLeaderboard();
 });
 
-document.getElementById('shareBtn').addEventListener('click',()=>{
-  const p=PROJECTS[currentProject];
-  const tweet=`I scored ${curScore} on ${currentProject} quiz! ${p.hashtag} ${userHandle} — try it: ${location.href}`;
-  window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,'_blank');
-});
-
+document.getElementById('closeModal').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
 document.getElementById('backBtn').addEventListener('click',()=>{
   document.getElementById('modal').style.display='none';
   document.getElementById('quizArea').style.display='none';
 });
 
-document.getElementById('cutBtn').addEventListener('click',()=>{
-  document.getElementById('modal').style.display='none';
+document.getElementById('shareBtn').addEventListener('click',()=>{
+  const p=PROJECTS[currentProject];
+  const tweet=`I scored ${curScore} on ${currentProject} quiz! ${p.hashtag} ${userHandle} — try it: ${location.href}`;
+  window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,'_blank');
 });
 
 function playSuccess(){try{new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3').play();}catch(e){}}
