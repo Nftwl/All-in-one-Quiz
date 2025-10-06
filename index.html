@@ -7,44 +7,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --zama:#ffda4a;       /* bright yellow */
-  --lighter:#a855f7;    /* bright purple */
-  --rialo:#0fdfff;      /* bright cyan */
+  --zama:#ffeb3b;
+  --lighter:#a855f7;
+  --rialo:#0ea5e9;
+  --bg1:#0b1220;
+  --bg2:#071226;
 }
 *{box-sizing:border-box;}
-body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#0b1220,#071226);color:#fff;}
-.container{max-width:900px;margin:30px auto;padding:20px;}
+body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg1);color:#fff;overflow-x:hidden;}
+.animated-bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(120deg,var(--zama),var(--lighter),var(--rialo));animation:bgShift 20s ease-in-out infinite alternate;}
+@keyframes bgShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+.container{max-width:1100px;margin:20px auto;padding:20px;}
 header{text-align:center;margin-bottom:20px;}
 header h1{margin:10px 0;color:#fff;}
+header p{color:#d1d5db;}
 .projects{display:flex;gap:15px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;}
-.proj{flex:1 1 30%;padding:20px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .2s, box-shadow .2s;text-align:center;color:#071226;}
-.proj:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.3);}
-.proj.zama{background:linear-gradient(180deg,#fff8b0,#fff07a);}
-.proj.lighter{background:linear-gradient(180deg,#eabfff,#c471ff);}
-.proj.rialo{background:linear-gradient(180deg,#b0ffff,#4defff);}
+.proj{flex:1 1 30%;padding:20px;border-radius:12px;font-weight:600;cursor:pointer;text-align:center;transition:0.3s;display:flex;flex-direction:column;align-items:center;}
+.proj:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.35);}
+.proj.zama{background:linear-gradient(180deg,#fff7de,#fff1b0);color:#000;}
+.proj.ligher{background:linear-gradient(180deg,#f3eaff,#eedbff);color:#000;}
+.proj.rialo{background:linear-gradient(180deg,#dff7ff,#cdeeff);color:#000;}
 .quiz-area{display:none;margin-top:20px;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;}
 .question{font-size:18px;margin:12px 0;}
 .options{display:grid;gap:10px;}
 .opt{padding:10px;border-radius:10px;background:rgba(255,255,255,0.05);cursor:pointer;transition:0.2s;}
 .opt.correct{background:linear-gradient(90deg,#e6ffef,#b0f3d0);color:#05331a;}
 .opt.wrong{background:linear-gradient(90deg,#ffdede,#ffbdbd);color:#4b0000;}
-.controls{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;}
+.controls{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;}
 .btn{padding:10px 15px;border:none;border-radius:10px;cursor:pointer;font-weight:700;}
-.btn.primary{background:linear-gradient(90deg,var(--zama),#ffd46a);color:#071226;}
-.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;}
+.btn.primary{background:linear-gradient(90deg,var(--zama),#ffd700);color:#000;}
 .progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:10px;overflow:hidden;}
-.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--zama),#ffd46a);width:0%;transition:width .4s;}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--zama),#ffd700);width:0%;transition:width .4s;}
 .leaderboard{margin-top:20px;background:rgba(255,255,255,0.05);padding:12px;border-radius:12px;}
-.faqs{margin-top:20px;background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;}
-.faqs h3{margin-top:0;}
-.faqs a{color:#fff;text-decoration:underline;}
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:10;}
-.modal-content{background:#fff;color:#071226;padding:20px;border-radius:12px;text-align:center;max-width:400px;width:90%;}
-.modal-content h2{margin-top:0;}
-.modal-content button{margin-top:15px;}
+.info-card{background:rgba(255,255,255,0.05);padding:12px;border-radius:12px;margin-top:12px;}
+table{width:100%;border-collapse:collapse;margin-top:12px;}
+th,td{padding:8px;border:1px solid rgba(255,255,255,0.2);text-align:center;}
+th{background:rgba(255,255,255,0.1);}
+a.link{color:#fff;text-decoration:underline;}
 </style>
 </head>
 <body>
+<div class="animated-bg" aria-hidden="true"></div>
 <div class="container">
 <header>
 <h1>OG Builder Hub</h1>
@@ -73,143 +76,84 @@ header h1{margin:10px 0;color:#fff;}
 <div id="leaderboardContent"></div>
 </div>
 
-<div class="faqs" id="faqs">
+<div class="info-card">
 <h3>Project Info & FAQs</h3>
 <ul>
-<li><strong>Zama:</strong> Privacy-focused FHE library. Visit <a href="https://x.com/zama_fhe" target="_blank">@zama_fhe</a></li>
-<li><strong>Ligher:</strong> zk-rollup exchange & DeFi project. Visit <a href="https://x.com/vnovakovski" target="_blank">@vnovakovski</a></li>
-<li><strong>Rialo:</strong> Connects real-world data to Web3. Visit <a href="https://x.com/RialoHQ" target="_blank">@RialoHQ</a></li>
+<li><strong>Zama:</strong> FHE & Privacy. X handle: <a class="link" href="https://x.com/zama_fhe" target="_blank">@zama_fhe</a></li>
+<li><strong>Ligher:</strong> zkRollups & Perpetual Exchange. X handle: <a class="link" href="https://x.com/vnovakovski" target="_blank">@vnovakovski</a></li>
+<li><strong>Rialo:</strong> Real-world data & Web3. X handle: <a class="link" href="https://x.com/RialoHQ" target="_blank">@RialoHQ</a></li>
 </ul>
-</div>
-
-<div class="modal" id="modal">
-<div class="modal-content">
-<h2>🎉 Congratulations!</h2>
-<p id="modalMsg"></p>
-<button class="btn primary" id="shareBtn">Share on X</button>
-<button class="btn secondary" id="closeModal">Close</button>
-</div>
+<h3>Comparison</h3>
+<table>
+<tr><th>Project</th><th>Focus</th><th>Tech</th></tr>
+<tr><td>Zama</td><td>Privacy</td><td>FHE</td></tr>
+<tr><td>Ligher</td><td>Scaling</td><td>zkRollups</td></tr>
+<tr><td>Rialo</td><td>Data</td><td>Web3 Integration</td></tr>
+</table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
 const userHandle='@Vikash1234Singh';
 const PROJECTS={
-zama:{hashtag:'#FHE',questions:[
-{q:'What does FHE stand for?',opts:['Fully Homomorphic Encryption','Fast Hybrid Encryption'],a:0},
-{q:'Which library is associated with Zama?',opts:['Concrete','TensorFlow'],a:0}]},
-lighter:{hashtag:'#zkRollups',questions:[
-{q:'What does Ligher primarily build?',opts:['zk-rollup exchange','NFT marketplace'],a:0},
-{q:'Core goal of Ligher?',opts:['Low latency trading','Cooking recipes'],a:0}]},
-rialo:{hashtag:'#RealWorldWeb3',questions:[
-{q:'Rialo focuses on connecting what?',opts:['Real-world data','Only NFTs'],a:0},
-{q:'Lab behind Rialo?',opts:['Subzero Labs','Random Lab'],a:0}]}
+zama:{questions:[{q:'What does FHE stand for?',opts:['Fully Homomorphic Encryption','Fast Hybrid Encryption'],a:0},{q:'Key advantage of FHE?',opts:['Compute on encrypted data','Faster blockchain'],a:0}]},
+lighter:{questions:[{q:'Ligher primary build?',opts:['zk-rollup perpetual exchange','NFT marketplace'],a:0},{q:'Benefit of zkRollups?',opts:['Scale + on-chain security','Stop websites'],a:0}]},
+rialo:{questions:[{q:'Rialo focuses on?',opts:['Real-world data to Web3','Only NFTs'],a:0},{q:'Rialo main investor?',opts:['Coinbase Ventures','Unknown'],a:0}]}
 };
 let currentProject=null,qIndex=0,curScore=0;
-const LB_KEY='oghub_leaderboard_v1';
 
-function showQuiz(proj){
-  currentProject=proj;
-  qIndex=0;
-  curScore=0;
-  document.getElementById('quizArea').style.display='block';
-  renderQuestion();
-  document.getElementById('scoreVal').innerText='0';
-}
+function showQuiz(proj){currentProject=proj;qIndex=0;curScore=0;document.getElementById('quizArea').style.display='block';renderQuestion();document.getElementById('scoreVal').innerText='0';}
+document.querySelectorAll('.proj').forEach(el=>el.addEventListener('click',()=>showQuiz(el.getAttribute('data-project'))));
 
 function renderQuestion(){
-  const p=PROJECTS[currentProject];
-  const q=p.questions[qIndex];
-  const ol=document.getElementById('optionsList');
-  ol.innerHTML='';
-  document.getElementById('questionText').innerText=q.q;
-  q.opts.forEach((opt,i)=>{
-    const b=document.createElement('div');
-    b.className='opt';
-    b.innerText=opt;
-    b.onclick=()=> selectOption(i,b);
-    ol.appendChild(b);
-  });
-  document.getElementById('btnNext').style.display='none';
-  document.getElementById('btnFinish').style.display='none';
-  document.getElementById('progBar').style.width=(qIndex/p.questions.length*100)+'%';
+const p=PROJECTS[currentProject];
+const q=p.questions[qIndex];
+const ol=document.getElementById('optionsList');
+ol.innerHTML='';
+document.getElementById('questionText').innerText=q.q;
+q.opts.forEach((opt,i)=>{
+const b=document.createElement('div');b.className='opt';b.innerText=opt;b.onclick=()=>selectOption(i,b);ol.appendChild(b);
+});
+document.getElementById('btnNext').style.display='none';
+document.getElementById('btnFinish').style.display='none';
+document.getElementById('progBar').style.width=(qIndex/p.questions.length*100)+'%';
 }
 
 function selectOption(idx,btn){
-  const q=PROJECTS[currentProject].questions[qIndex];
-  const opts=document.querySelectorAll('#optionsList .opt');
-  opts.forEach(o=>o.style.pointerEvents='none');
-  if(idx===q.a){
-    btn.classList.add('correct');
-    curScore+=10;
-    document.getElementById('scoreVal').innerText=curScore;
-    playSuccess();
-  }else{
-    btn.classList.add('wrong');
-    opts[q.a].classList.add('correct');
-    playFail();
-  }
-  if(qIndex<PROJECTS[currentProject].questions.length-1){
-    document.getElementById('btnNext').style.display='inline-block';
-  }else{
-    document.getElementById('btnFinish').style.display='inline-block';
-  }
+const q=PROJECTS[currentProject].questions[qIndex];
+const opts=document.querySelectorAll('#optionsList .opt');
+opts.forEach(o=>o.style.pointerEvents='none');
+if(idx===q.a){btn.classList.add('correct');curScore+=10;document.getElementById('scoreVal').innerText=curScore;playSuccess();}
+else{btn.classList.add('wrong');opts[q.a].classList.add('correct');playFail();}
+if(qIndex<PROJECTS[currentProject].questions.length-1){document.getElementById('btnNext').style.display='inline-block';}
+else{document.getElementById('btnFinish').style.display='inline-block';}
 }
 
-document.getElementById('btnNext').addEventListener('click',()=>{
-  qIndex++;
-  renderQuestion();
-});
-
+document.getElementById('btnNext').addEventListener('click',()=>{qIndex++;renderQuestion();});
 document.getElementById('btnFinish').addEventListener('click',()=>{
-  confetti({particleCount:100,spread:70});
-  document.getElementById('modalMsg').innerText=`You scored ${curScore} points in ${currentProject} quiz!`;
-  document.getElementById('modal').style.display='flex';
-  saveLeaderboard(currentProject,curScore);
-  updateLeaderboard();
-});
-
-document.getElementById('closeModal').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
-
-document.getElementById('shareBtn').addEventListener('click',()=>{
-  const p=PROJECTS[currentProject];
-  const tweet=`I scored ${curScore} on ${currentProject} quiz! ${p.hashtag} ${userHandle} — try it: ${location.href}`;
-  window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,'_blank');
+confetti({particleCount:100,spread:70});
+alert('Congratulations! Your score: '+curScore);
+let p=PROJECTS[currentProject];
+let tweet=`I scored ${curScore}/${p.questions.length*10} on ${currentProject} quiz! ${currentProject==='zama'? '@zama_fhe':currentProject==='lighter'? '@vnovakovski':'@RialoHQ'} ${userHandle} — try it: ${location.href}`;
+window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,'_blank');
+saveLeaderboard(currentProject,curScore);
 });
 
 function playSuccess(){try{new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3').play();}catch(e){}}
 function playFail(){try{new Audio('https://www.soundjay.com/buttons/sounds/button-14.mp3').play();}catch(e){}}
 
+/* Local leaderboard */
 function saveLeaderboard(proj,score){
-  let data=JSON.parse(localStorage.getItem(LB_KEY)||'{}');
-  if(!data[proj]) data[proj]=[];
-  data[proj].push({score:score,time:Date.now()});
-  data[proj].sort((a,b)=>b.score-a.score);
-  if(data[proj].length>5) data[proj].pop();
-  localStorage.setItem(LB_KEY,JSON.stringify(data));
+let data=JSON.parse(localStorage.getItem('oghub_leaderboard')||'{}');
+if(!data[proj]) data[proj]=[];
+data[proj].push({score,handle:userHandle,time:Date.now()});
+localStorage.setItem('oghub_leaderboard',JSON.stringify(data));
+renderLeaderboard();
 }
-
-function updateLeaderboard(){
-  const data=JSON.parse(localStorage.getItem(LB_KEY)||'{}');
-  const container=document.getElementById('leaderboardContent');
-  container.innerHTML='';
-  for(const proj in data){
-    const title=document.createElement('div');
-    title.style.marginTop='8px';
-    title.style.fontWeight='700';
-    title.innerText=proj.toUpperCase();
-    container.appendChild(title);
-    data[proj].forEach(item=>{
-      const row=document.createElement('div');
-      row.innerText=`Score: ${item.score} pts`;
-      container.appendChild(row);
-    });
-  }
-}
-
-document.querySelectorAll('.proj').forEach(el=>el.addEventListener('click',()=>showQuiz(el.getAttribute('data-project'))));
-
-updateLeaderboard();
-</script>
-</body>
-</html>
+function renderLeaderboard(){
+let data=JSON.parse(localStorage.getItem('oghub_leaderboard')||'{}');
+const container=document.getElementById('leaderboardContent');
+container.innerHTML='';
+for(let proj in data){
+container.innerHTML+='<h4>'+proj.toUpperCase()+'</h4>';
+data[proj
