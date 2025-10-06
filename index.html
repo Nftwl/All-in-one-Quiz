@@ -7,40 +7,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --zama:#ffd700;       /* professional gold */
-  --lighter:#9b59b6;    /* deep purple */
+  --zama:#ffd700;       /* gold */
+  --lighter:#9b59b6;    /* purple */
   --rialo:#1abc9c;      /* teal */
 }
 *{box-sizing:border-box;}
-body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#0b1220,#071226);color:#fff;}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(135deg,#fff176,#ffeb3b);
+  color:#071226;
+}
 .container{max-width:950px;margin:30px auto;padding:20px;}
 header{text-align:center;margin-bottom:20px;}
-header h1{margin:10px 0;color:#fff;}
+header h1{margin:10px 0;color:#071226;}
 .projects{display:flex;gap:15px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;}
 .proj{flex:1 1 30%;padding:20px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .2s, box-shadow .2s;text-align:center;color:#071226;}
 .proj:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.3);}
-.proj.zama{background:linear-gradient(180deg,#fff7b2,#ffd700);}
-.proj.lighter{background:linear-gradient(180deg,#e6ccff,#9b59b6);}
-.proj.rialo{background:linear-gradient(180deg,#a0f0e5,#1abc9c);}
-.quiz-area{display:none;margin-top:20px;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;}
+.proj.zama{background:linear-gradient(180deg,#fff59d,#ffd700);}
+.proj.lighter{background:linear-gradient(180deg,#d1b3ff,#9b59b6);}
+.proj.rialo{background:linear-gradient(180deg,#7ef0e8,#1abc9c);}
+.quiz-area{display:none;margin-top:20px;background:rgba(255,255,255,0.8);padding:20px;border-radius:12px;color:#071226;}
 .question{font-size:18px;margin:12px 0;}
 .options{display:grid;gap:10px;}
-.opt{padding:10px;border-radius:10px;background:rgba(255,255,255,0.05);cursor:pointer;transition:0.2s;}
+.opt{padding:10px;border-radius:10px;background:rgba(0,0,0,0.05);cursor:pointer;transition:0.2s;}
 .opt.correct{background:linear-gradient(90deg,#e6ffef,#b0f3d0);color:#05331a;}
 .opt.wrong{background:linear-gradient(90deg,#ffdede,#ffbdbd);color:#4b0000;}
 .controls{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;}
 .btn{padding:10px 15px;border:none;border-radius:10px;cursor:pointer;font-weight:700;}
 .btn.primary{background:linear-gradient(90deg,var(--zama),#ffd46a);color:#071226;}
-.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;}
-.progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:10px;overflow:hidden;}
+.btn.secondary{background:linear-gradient(90deg,#bbb,#888);color:#071226;}
+.progress{height:10px;background:rgba(0,0,0,0.1);border-radius:999px;margin-top:10px;overflow:hidden;}
 .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--zama),#ffd46a);width:0%;transition:width .4s;}
-.leaderboard{margin-top:20px;background:rgba(255,255,255,0.05);padding:12px;border-radius:12px;}
-.faqs{margin-top:20px;background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;}
+.leaderboard{margin-top:20px;background:#fff9c4;padding:12px;border-radius:12px;color:#071226;}
+.faqs{margin-top:20px;background:#d1c4e9;padding:15px;border-radius:12px;color:#071226;}
 .faqs h3{margin-top:0;}
-.faqs a{color:#fff;text-decoration:underline;}
-.comparison{margin-top:20px;background:rgba(255,255,255,0.05);padding:15px;border-radius:12px;}
+.faqs a{color:#071226;text-decoration:underline;font-weight:600;}
+.comparison{margin-top:20px;background:#b2ebf2;padding:15px;border-radius:12px;color:#071226;}
 .comparison table{width:100%;border-collapse:collapse;color:#071226;}
-.comparison th, .comparison td{padding:10px;border:1px solid rgba(0,0,0,0.2);text-align:center;}
+.comparison th, .comparison td{padding:10px;border:2px solid #071226;text-align:center;}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:10;}
 .modal-content{background:#fff;color:#071226;padding:20px;border-radius:12px;text-align:center;max-width:400px;width:90%;}
 .modal-content h2{margin-top:0;}
@@ -121,7 +126,7 @@ rialo:{hashtag:'#RealWorldWeb3',questions:[
 {q:'Lab behind Rialo?',opts:['Subzero Labs','Random Lab'],a:0}]}
 };
 let currentProject=null,qIndex=0,curScore=0;
-const LB_KEY='oghub_leaderboard_v2';
+const LB_KEY='oghub_leaderboard_v3';
 
 function showQuiz(proj){
   currentProject=proj;
@@ -203,7 +208,7 @@ function saveLeaderboard(proj,score){
   let data=JSON.parse(localStorage.getItem(LB_KEY)||'{}');
   if(!data[proj]) data[proj]=[];
   data[proj].push({score:score,time:Date.now()});
-  data[proj].sort((a,b)=>b.score-a.score);
+  data[proj].sort((a,b)=>b.score-b.score);
   if(data[proj].length>5) data[proj].pop();
   localStorage.setItem(LB_KEY,JSON.stringify(data));
 }
