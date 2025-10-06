@@ -10,116 +10,101 @@
   --zama:#ffcc00;
   --lighter:#8b5cf6;
   --rialo:#00b4ff;
-  --bg1:#0b1220;
-  --bg2:#071226;
-  --glass: rgba(255,255,255,0.05);
-  --radius:14px;
 }
-*{box-sizing:border-box}
-body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(120deg,var(--bg1),var(--bg2));color:#fff;overflow-x:hidden;}
-.animated-bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(255,204,0,0.07),rgba(139,92,246,0.06),rgba(0,180,255,0.05));animation:bgShift 14s ease-in-out infinite;filter:blur(40px) saturate(1.1);}
-@keyframes bgShift{0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-8%) rotate(3deg);}100%{transform:translateY(0) rotate(0deg);}}
-.container{max-width:1100px;margin:30px auto;padding:20px;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#0b1220,#071226);color:#fff;}
+.container{max-width:900px;margin:30px auto;padding:20px;}
 header{text-align:center;margin-bottom:20px;}
-header h1{margin:10px 0;color:#fff;font-size:2rem;}
-header p{color:#cfd8e1;}
+header h1{margin:10px 0;color:#fff;}
 .projects{display:flex;gap:15px;flex-wrap:wrap;justify-content:space-between;margin-bottom:20px;}
-.proj{flex:1 1 30%;padding:20px;border-radius:var(--radius);color:#071226;font-weight:600;cursor:pointer;transition:transform .2s, box-shadow .2s;display:flex;flex-direction:column;gap:10px;}
-.proj:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(0,0,0,0.35)}
-.proj.zama{background:linear-gradient(180deg,#fff7de,#fff1b0)}
-.proj.ligher{background:linear-gradient(180deg,#f3eaff,#eedbff)}
-.proj.rialo{background:linear-gradient(180deg,#dff7ff,#cdeeff)}
-.quiz-area{display:none;margin-top:20px;background:var(--glass);padding:20px;border-radius:var(--radius);}
-.question{font-size:18px;margin:12px 0;font-weight:600;}
+.proj{flex:1 1 30%;padding:20px;border-radius:12px;font-weight:600;cursor:pointer;transition:transform .2s, box-shadow .2s;text-align:center;}
+.proj:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,0.3);}
+.proj.zama{background:linear-gradient(180deg,#fff7de,#fff1b0);color:#071226;}
+.proj.ligher{background:linear-gradient(180deg,#f3eaff,#eedbff);color:#071226;}
+.proj.rialo{background:linear-gradient(180deg,#dff7ff,#cdeeff);color:#071226;}
+.quiz-area{display:none;margin-top:20px;background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;}
+.question{font-size:18px;margin:12px 0;}
 .options{display:grid;gap:10px;}
-.opt{padding:12px;border-radius:10px;background:rgba(255,255,255,0.05);cursor:pointer;transition:0.2s;}
+.opt{padding:10px;border-radius:10px;background:rgba(255,255,255,0.05);cursor:pointer;transition:0.2s;}
 .opt.correct{background:linear-gradient(90deg,#e6ffef,#b0f3d0);color:#05331a;}
 .opt.wrong{background:linear-gradient(90deg,#ffdede,#ffbdbd);color:#4b0000;}
-.controls{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;}
+.controls{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;}
 .btn{padding:10px 15px;border:none;border-radius:10px;cursor:pointer;font-weight:700;}
 .btn.primary{background:linear-gradient(90deg,var(--zama),#ffd46a);color:#071226;}
-.btn.secondary{background:rgba(255,255,255,0.1);color:#fff;}
-.progress{height:12px;background:rgba(255,255,255,0.05);border-radius:999px;margin-top:10px;overflow:hidden;}
+.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;}
+.progress{height:10px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:10px;overflow:hidden;}
 .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--zama),#ffd46a);width:0%;transition:width .4s;}
-.leaderboard{margin-top:20px;background:var(--glass);padding:15px;border-radius:var(--radius);}
-.badge{padding:6px 12px;border-radius:999px;font-weight:700;color:#071226;margin-bottom:10px;display:inline-block;}
-.badge.zama{background:linear-gradient(90deg,var(--zama),#ffd46a);}
-.badge.ligher{background:linear-gradient(90deg,var(--lighter),#c594ff);}
-.badge.rialo{background:linear-gradient(90deg,var(--rialo),#6fe0ff);}
-.final-msg{background:linear-gradient(90deg,#fff8d6,#ffe7a3);color:#071226;padding:12px;border-radius:12px;margin-top:12px;font-weight:700;text-align:center;}
-@media(max-width:720px){.proj{flex:1 1 100%;}}
+.leaderboard{margin-top:20px;background:rgba(255,255,255,0.05);padding:12px;border-radius:12px;}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:10;}
+.modal-content{background:#fff;color:#071226;padding:20px;border-radius:12px;text-align:center;max-width:400px;width:90%;}
+.modal-content h2{margin-top:0;}
+.modal-content button{margin-top:15px;}
 </style>
 </head>
 <body>
-<div class="animated-bg" aria-hidden="true"></div>
 <div class="container">
 <header>
 <h1>OG Builder Hub</h1>
 <p>Complete quizzes for Zama, Ligher, Rialo to earn badges & OG rank!</p>
 </header>
+
 <div class="projects" id="projects">
 <div class="proj zama" data-project="zama">Zama Quiz</div>
 <div class="proj lighter" data-project="lighter">Ligher Quiz</div>
 <div class="proj rialo" data-project="rialo">Rialo Quiz</div>
 </div>
+
 <div class="quiz-area" id="quizArea">
-<div class="badge" id="projBadge">PROJECT</div>
 <div class="question" id="questionText"></div>
 <div class="options" id="optionsList"></div>
 <div class="progress"><i id="progBar"></i></div>
 <div class="controls">
-<button class="btn secondary" id="btnReveal">Reveal Answer</button>
 <button class="btn primary" id="btnNext" style="display:none">Next</button>
 <button class="btn primary" id="btnFinish" style="display:none">Finish & Share</button>
-<button class="btn secondary" id="btnRetry" style="display:none">Retry</button>
 </div>
 <div style="margin-top:10px">Score: <span id="scoreVal">0</span></div>
-<div class="final-msg" id="finalMsg" style="display:none;"></div>
 </div>
-<div class="leaderboard" id="leaderboard"><h3>Leaderboard (Local)</h3><div id="leaderboardContent"></div></div>
+
+<div class="leaderboard" id="leaderboard">
+<h3>Leaderboard (Local)</h3>
+<div id="leaderboardContent"></div>
 </div>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+<h2>🎉 Congratulations!</h2>
+<p id="modalMsg"></p>
+<button class="btn primary" id="shareBtn">Share on X</button>
+<button class="btn secondary" id="closeModal">Close</button>
+</div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <script>
 const userHandle='@Vikash1234Singh';
 const PROJECTS={
-zama:{badge:'Zama',color:'var(--zama)',tag:'@zama_fhe',hashtag:'#FHE',questions:[
-{q:'What does FHE stand for?',opts:['Fully Homomorphic Encryption','Fast Hybrid Encryption','Functional Hash Encoding','Fixed Homomorphic Engine'],a:0},
-{q:'Which library is associated with Zama?',opts:['Concrete','TensorFlow','PyTorch','OpenSSL'],a:0},
-{q:'Key advantage of FHE?',opts:['Compute on encrypted data','Faster blockchain','Lower bandwidth','Free transactions'],a:0},
-{q:'Common language in Zama libs?',opts:['Rust','PHP','Ruby','VB'],a:0},
-{q:'Why is FHE important?',opts:['Privacy-preserving computation','Faster UI','Free gas','Better images'],a:0}
-]},
-lighter:{badge:'Ligher',color:'var(--lighter)',tag:'@vnovakovski',hashtag:'#zkRollups',questions:[
-{q:'What does Ligher primarily build?',opts:['zk-rollup perpetual exchange','NFT marketplace','Lending protocol','Game engine'],a:0},
-{q:'Core goal of Ligher?',opts:['Low latency trading','Cooking recipes','Photo sharing','Video hosting'],a:0},
-{q:'Ligher emphasizes which tech?',opts:['zk proofs','Proof-of-work','Centralized ledgers','CDNs'],a:0},
-{q:'Benefit of zkRollups?',opts:['Scale + on-chain security','Stop websites','Destroy tokens','Increase spam'],a:0},
-{q:'Public team handle?',opts:['@vnovakovski','@someoneelse','@nobody','@anon'],a:0}
-]},
-rialo:{badge:'Rialo',color:'var(--rialo)',tag:'@RialoHQ',hashtag:'#RealWorldWeb3',questions:[
-{q:'Rialo focuses on connecting what?',opts:['Real-world data to Web3','Only NFTs','Only wallets','Only games'],a:0},
-{q:'Lab behind Rialo?',opts:['Subzero Labs','Random Lab','No lab','SpaceX'],a:0},
-{q:'Rialo aims to improve?',opts:['Connectivity & speed','Cooking speed','Photo filters','Streaming quality'],a:0},
-{q:'Investor participated in Rialo round?',opts:['Coinbase Ventures','Unknown','No one','A baker'],a:0},
-{q:'Rialo is best described as?',opts:['Real-data blockchain platform','Chat app','Ecommerce store','Music player'],a:0}
-]}
+zama:{hashtag:'#FHE',questions:[
+{q:'What does FHE stand for?',opts:['Fully Homomorphic Encryption','Fast Hybrid Encryption'],a:0},
+{q:'Which library is associated with Zama?',opts:['Concrete','TensorFlow'],a:0}]},
+lighter:{hashtag:'#zkRollups',questions:[
+{q:'What does Ligher primarily build?',opts:['zk-rollup exchange','NFT marketplace'],a:0},
+{q:'Core goal of Ligher?',opts:['Low latency trading','Cooking recipes'],a:0}]},
+rialo:{hashtag:'#RealWorldWeb3',questions:[
+{q:'Rialo focuses on connecting what?',opts:['Real-world data','Only NFTs'],a:0},
+{q:'Lab behind Rialo?',opts:['Subzero Labs','Random Lab'],a:0}]}
 };
 let currentProject=null,qIndex=0,curScore=0;
+const LB_KEY='oghub_leaderboard_v1';
 
 function showQuiz(proj){
   currentProject=proj;
   qIndex=0;
   curScore=0;
   document.getElementById('quizArea').style.display='block';
-  document.getElementById('finalMsg').style.display='none';
-  document.getElementById('scoreVal').innerText='0';
-  const badge=document.getElementById('projBadge');
-  badge.innerText=PROJECTS[proj].badge;
-  badge.style.background=PROJECTS[proj].color;
   renderQuestion();
+  document.getElementById('scoreVal').innerText='0';
 }
-
-document.querySelectorAll('.proj').forEach(el=>el.addEventListener('click',()=>showQuiz(el.getAttribute('data-project'))));
 
 function renderQuestion(){
   const p=PROJECTS[currentProject];
@@ -131,15 +116,89 @@ function renderQuestion(){
     const b=document.createElement('div');
     b.className='opt';
     b.innerText=opt;
-    b.onclick=()=>selectOption(i,b);
+    b.onclick=()=> selectOption(i,b);
     ol.appendChild(b);
   });
   document.getElementById('btnNext').style.display='none';
   document.getElementById('btnFinish').style.display='none';
-  document.getElementById('btnRetry').style.display='none';
-  document.getElementById('btnReveal').style.display='inline-block';
   document.getElementById('progBar').style.width=(qIndex/p.questions.length*100)+'%';
 }
 
 function selectOption(idx,btn){
-  const
+  const q=PROJECTS[currentProject].questions[qIndex];
+  const opts=document.querySelectorAll('#optionsList .opt');
+  opts.forEach(o=>o.style.pointerEvents='none');
+  if(idx===q.a){
+    btn.classList.add('correct');
+    curScore+=10;
+    document.getElementById('scoreVal').innerText=curScore;
+    playSuccess();
+  }else{
+    btn.classList.add('wrong');
+    opts[q.a].classList.add('correct');
+    playFail();
+  }
+  if(qIndex<PROJECTS[currentProject].questions.length-1){
+    document.getElementById('btnNext').style.display='inline-block';
+  }else{
+    document.getElementById('btnFinish').style.display='inline-block';
+  }
+}
+
+document.getElementById('btnNext').addEventListener('click',()=>{
+  qIndex++;
+  renderQuestion();
+});
+
+document.getElementById('btnFinish').addEventListener('click',()=>{
+  confetti({particleCount:100,spread:70});
+  document.getElementById('modalMsg').innerText=`You scored ${curScore} points in ${currentProject} quiz!`;
+  document.getElementById('modal').style.display='flex';
+  saveLeaderboard(currentProject,curScore);
+  updateLeaderboard();
+});
+
+document.getElementById('closeModal').addEventListener('click',()=>{document.getElementById('modal').style.display='none';});
+
+document.getElementById('shareBtn').addEventListener('click',()=>{
+  const p=PROJECTS[currentProject];
+  const tweet=`I scored ${curScore} on ${currentProject} quiz! ${p.hashtag} ${userHandle} — try it: ${location.href}`;
+  window.open(`https://x.com/intent/tweet?text=${encodeURIComponent(tweet)}`,'_blank');
+});
+
+function playSuccess(){try{new Audio('https://www.soundjay.com/buttons/sounds/button-3.mp3').play();}catch(e){}}
+function playFail(){try{new Audio('https://www.soundjay.com/buttons/sounds/button-14.mp3').play();}catch(e){}}
+
+function saveLeaderboard(proj,score){
+  let data=JSON.parse(localStorage.getItem(LB_KEY)||'{}');
+  if(!data[proj]) data[proj]=[];
+  data[proj].push({score:score,time:Date.now()});
+  data[proj].sort((a,b)=>b.score-a.score);
+  if(data[proj].length>5) data[proj].pop();
+  localStorage.setItem(LB_KEY,JSON.stringify(data));
+}
+
+function updateLeaderboard(){
+  const data=JSON.parse(localStorage.getItem(LB_KEY)||'{}');
+  const container=document.getElementById('leaderboardContent');
+  container.innerHTML='';
+  for(const proj in data){
+    const title=document.createElement('div');
+    title.style.marginTop='8px';
+    title.style.fontWeight='700';
+    title.innerText=proj.toUpperCase();
+    container.appendChild(title);
+    data[proj].forEach(item=>{
+      const row=document.createElement('div');
+      row.innerText=`Score: ${item.score} pts`;
+      container.appendChild(row);
+    });
+  }
+}
+
+document.querySelectorAll('.proj').forEach(el=>el.addEventListener('click',()=>showQuiz(el.getAttribute('data-project'))));
+
+updateLeaderboard();
+</script>
+</body>
+</html>
